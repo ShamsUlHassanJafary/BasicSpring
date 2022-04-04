@@ -1,0 +1,114 @@
+<div class="row justify-content-center">
+  <div class="col-10">
+    <div *ngIf="customer">
+      <h2><span>Customer</span> {{ customer.id }}</h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>First Name</span></dt>
+        <dd>
+          <span>{{ customer.firstName }}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+          <span>{{ customer.lastName }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ customer.email }}</span>
+        </dd>
+        <dt><span>Phone Number</span></dt>
+        <dd>
+          <span>{{ customer.phoneNumber }}</span>
+        </dd>
+        <dt><span ngbTooltip="keepData">Has Data Keep Consent</span></dt>
+        <dd>
+          <span>{{ customer.hasDataKeepConsent }}</span>
+        </dd>
+        <dt><span>Has Marketing Content</span></dt>
+        <dd>
+          <span>{{ customer.hasMarketingContent }}</span>
+        </dd>
+        <dt><span>Has Notification Content</span></dt>
+        <dd>
+          <span>{{ customer.hasNotificationContent }}</span>
+        </dd>
+        <dt>History</dt>
+        <dd>
+            <jhi-alert></jhi-alert>
+          <ngb-accordion [closeOthers]="true" class="my-2">
+            <ngb-panel [id]="'static-' + i" *ngFor="let item of bookings | keyvalue; let i = index">
+              <ng-template ngbPanelHeader>
+                <div class="d-flex align-items-center justify-content-between">
+                  <button ngbPanelToggle class="btn btn-link">
+                    <h3>{{ item.key?.registration }}</h3>
+                  </button>
+                  <div *ngIf="item.value && item.value.length > 0 && item.key.id">
+                    <button type="button" class="btn btn-sm btn-dark" (click)="generateAndDownloadServiceHistoryReport(item.key.id)">
+                      <fa-icon [icon]="toggleDownloadIcon(item.key.id)" [spin]="toggleDownloadSpinner(item.key.id)"></fa-icon>
+                      &nbsp;<span>{{ toggleDownloadMessage(item.key.id) }}</span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-dark" (click)="sendServiceHistoryReport(item.key.id)">
+                      <fa-icon [icon]="toggleSendIcon(item.key.id)" [spin]="toggleSendSpinner(item.key.id)"></fa-icon>
+                      &nbsp;<span>{{ toggleSendMessage(item.key.id) }}</span>
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template ngbPanelContent *ngIf="item.value && item.value.length > 0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col"><span>Job(s) Done</span></th>
+                      <th scope="col"><span>Booking Date </span></th>
+                      <th scope="col"><span>Booking Time</span></th>
+                      <th scope="col"><span>Further Instruction</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let h of item.value">
+                      <td>
+                        <ul *ngIf="h?.jobs">
+                          <li *ngFor="let job of h?.jobs">
+                            <h5>{{ job.description }}</h5>
+                          </li>
+                        </ul>
+                      </td>
+                      <td>{{ h?.bookingDate | date: 'dd/MM/yyyy' }}</td>
+                      <td>{{ h?.bookingTime | date: 'HH:mm' }}</td>
+                      <td>{{ h?.furtherInstruction }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-template>
+              <ng-template ngbPanelContent *ngIf="item.value && item.value.length === 0">
+                <ngb-alert [dismissible]="false"> No Service History available for this vehicle. </ngb-alert>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+          <button
+            id="jh-create-entity"
+            type="button"
+            class="btn btn-secondary btn-sm my-2"
+            [routerLink]="['/vehicle/new']"
+            [state]="{ customerId: customer.id }"
+          >
+            <fa-icon icon="plus"></fa-icon>
+            <span class="d-none d-md-inline">Add Vehicle</span>
+          </button>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/customer', customer.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

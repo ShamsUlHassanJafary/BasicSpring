@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="invoice">
+      <h2><span>Invoice</span> {{ invoice.reference }}</h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+      <dl class="row-md jh-entity-details">
+        <dt><span>Vehicle</span></dt>
+        <dd>
+          <div *ngIf="invoice?.booking?.vehicle">
+            <a [routerLink]="['/vehicle', invoice?.booking?.vehicle?.id, 'view']">{{ invoice?.booking?.vehicle?.registration }}</a>
+          </div>
+        </dd>
+        <dt><span>Jobs Required</span></dt>
+        <dd>
+          <ul>
+            <li *ngFor="let job of invoice?.booking?.jobs">{{ job.description }}</li>
+          </ul>
+        </dd>
+        <dt><span>Further Instruction</span></dt>
+        <dd>
+          <span>{{ invoice?.booking?.furtherInstruction }}</span>
+        </dd>
+        <dt><span>Mileage</span></dt>
+        <dd>
+          <span>{{ invoice?.booking?.mileage }}</span>
+        </dd>
+        <dt><span>Customer</span></dt>
+        <dd>
+          <div *ngIf="invoice?.booking?.customer">
+            <a [routerLink]="['/customer', invoice?.booking?.customer?.id, 'view']">{{
+              invoice?.booking?.customer?.firstName + ' ' + invoice?.booking?.customer?.lastName
+            }}</a>
+          </div>
+        </dd>
+        <dt><span ngbTooltip="fieldName">Invoice Date</span></dt>
+        <dd>
+          <span>{{ invoice.issueDate | date: 'dd/MM/yyyy' }}</span>
+        </dd>
+        <dt><span>Invoice Total</span></dt>
+        <dd>
+          <span>{{ invoice.invoiceTotal | currency: 'GBP' }}</span>
+        </dd>
+      </dl>
+
+      <jhi-alert></jhi-alert>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/invoice', invoice.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+      <button type="button" *ngIf="invoice?.booking?.status == 'INVOICED'" (click)="sendInvoice()" class="btn btn-dark">
+        <fa-icon [icon]="faSendStatus" [spin]="isSending"></fa-icon>
+        &nbsp;<span> {{ sendingMessage }}</span>
+      </button>
+      <button type="button" *ngIf="invoice?.booking?.status == 'INVOICED'" (click)="generateAndDownloadInvoice()" class="btn btn-dark">
+        <fa-icon [icon]="faDownloadStatus" [spin]="isDownloading"></fa-icon>
+        &nbsp;<span> {{ downloadingMessage }}</span>
+      </button>
+    </div>
+  </div>
+</div>

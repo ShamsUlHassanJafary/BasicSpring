@@ -1,0 +1,86 @@
+.page-wrapper {
+  height: 100vh;
+
+  &.car-background {
+    // background: url('../../../content/images/gms4u-background-1080p.png');
+    // background-size: cover;
+    // background-position: center center;
+    // background-attachment: fixed;
+    // background-repeat: no-repeat;
+
+    height: 100vh;
+  }
+
+  .hamburger {
+    position: relative;
+    left: 0;
+    transition: left 0.3s ease;
+
+    &.is-active {
+      left: 260px;
+    }
+
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      background-color: #fff;
+    }
+
+    .hamburger-inner.dark,
+    .hamburger-inner.dark::before,
+    .hamburger-inner.dark::after {
+      background-color: #000;
+    }
+  }
+
+  .page-content {
+    display: inline-block;
+    width: 100%;
+    transition: padding-left 0.3s ease;
+
+    @media screen and (min-width: 768px) {
+      padding-left: 260px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 998;
+      background: #000;
+      opacity: 0.5;
+      display: none;
+
+      &.show {
+        @media screen and (max-width: 768px) {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .sidebar {
+    left: 0px;
+  }
+
+  &.toggled {
+    .page-content {
+      padding-left: 0;
+    }
+
+    .sidebar {
+      left: -300px;
+    }
+  }
+
+  .attribution {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+    margin: 5px;
+    letter-spacing: 1px;
+  }
+}

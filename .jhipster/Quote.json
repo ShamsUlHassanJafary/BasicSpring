@@ -1,0 +1,43 @@
+{
+  "name": "Quote",
+  "fields": [
+    {
+      "fieldName": "quoteDate",
+      "javadoc": "fieldName",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "quoteTotal",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMin": "0",
+      "fieldValidateRulesMax": "100"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "booking",
+      "otherEntityName": "booking",
+      "relationshipType": "one-to-one",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "quote"
+    }
+  ],
+  "changelogDate": "20201012201234",
+  "javadoc": "The Quote entity.\\n@author A true hipster",
+  "entityTableName": "quote",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "searchEngine": false,
+  "databaseType": "sql"
+}

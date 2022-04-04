@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Reminder.
+    -->
+    <changeSet id="20210225221054-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="customer_id"
+                                 baseTableName="reminder"
+                                 constraintName="fk_reminder_customer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"/>
+
+        <addForeignKeyConstraint baseColumnNames="vehicle_id"
+                                 baseTableName="reminder"
+                                 constraintName="fk_reminder_vehicle_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vehicle"/>
+
+        <addForeignKeyConstraint baseColumnNames="garage_id"
+                                 baseTableName="reminder"
+                                 constraintName="fk_reminder_garage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="garage"/>
+
+    </changeSet>
+</databaseChangeLog>

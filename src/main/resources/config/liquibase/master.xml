@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql, mariadb"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
+    <property name="clobType" value="clob" dbms="h2"/>
+    <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
+    <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201228_added_entity_Booking.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201229_added_entity_Customer.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201230_added_entity_Garage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201231_added_entity_GarageAdmin.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201232_added_entity_Invoice.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201233_added_entity_Job.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201234_added_entity_Quote.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201236_added_entity_Vehicle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201231_added_entity_GarageAdmin.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225221054_added_entity_Reminder.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210604221517_added_entity_GarageType.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20201012201228_added_entity_constraints_Booking.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201229_added_entity_constraints_Customer.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201230_added_entity_constraints_Garage.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201231_added_entity_constraints_GarageAdmin.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201236_added_entity_constraints_Vehicle.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201231_added_entity_constraints_GarageAdmin.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201012201233_added_entity_constraints_Job.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210320140436_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225221054_added_entity_constraints_Reminder.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210402123807_changelog.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210406214201_changelog.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210411110641_changelog.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210414230238_changelog.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210429204131_changelog.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210604222905_changelog.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210606144122_changelog.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/202106201029_added_entity_GarageType_data.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210711115056_changelog.xml"
+             relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/liquibase.quartz.init.xml"
+             relativeToChangelogFile="false"/>
+
+
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

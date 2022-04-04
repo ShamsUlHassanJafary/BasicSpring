@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "garageAdmin",
+            "relationshipName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipNameUndefined": false
+        },
+        {
+            "relationshipName": "garage",
+            "otherEntityName": "garage",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "garageAdmin",
+            "otherEntityRelationshipNameUndefined": true
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20201012201231",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "garage_admin",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

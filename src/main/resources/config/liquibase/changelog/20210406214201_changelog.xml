@@ -1,0 +1,46 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="Mbcatubig (generated)" id="1617745403989-6">
+        <addColumn tableName="garage">
+            <column name="business_email" type="varchar(254)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617745403989-8">
+        <addColumn tableName="garage">
+            <column name="phone_number" type="varchar(13)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617745403989-7">
+        <addColumn tableName="garage">
+            <column name="logo_url" type="varchar(256)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617745403989-1">
+        <setColumnRemarks columnName="booking_date" tableName="booking"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617745403989-2">
+        <setColumnRemarks columnName="business_name" tableName="garage"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617745403989-3">
+        <setColumnRemarks columnName="has_data_keep_consent" tableName="customer"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617745403989-4">
+        <setColumnRemarks columnName="invoice_date" tableName="invoice"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617745403989-5">
+        <setColumnRemarks columnName="quote_date" tableName="quote"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617745403989-6-data-update" context="faker">
+        <loadUpdateData tableName="garage" primaryKey="id" file="config/liquibase/fake-data/garage.csv"
+                        separator=";">
+            <column name="business_email" type="string" header="business_email"/>
+            <column name="phone_number" type="string" header="phone_number"/>
+            <column name="logo_url" type="string" header="logo_url"/>
+        </loadUpdateData>
+    </changeSet>
+
+</databaseChangeLog>

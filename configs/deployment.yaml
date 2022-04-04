@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+  vars_files:
+  - env_variables
+  tasks:
+  - name: stop jhpster service
+    command: "sudo systemctl stop jhipster_app.service"
+
+  - name: Delete existing dist folder
+    file:
+     path: "/opt/prod/gms-4-u-0.0.1-SNAPSHOT.jar"
+     state: absent
+  
+  - name: copy the jarfile to vm
+    copy:
+     src: /etc/ansible/teknigarage/gms-4-u-0.0.1-SNAPSHOT.jar
+     dest: /opt/prod/gms-4-u-0.0.1-SNAPSHOT.jar
+
+  - name: stop jhpster service
+    command: "sudo systemctl start jhipster_app.service"

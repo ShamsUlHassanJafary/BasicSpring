@@ -1,0 +1,48 @@
+{
+  "name": "Invoice",
+  "fields": [
+    {
+      "fieldName": "invoiceDate",
+      "javadoc": "fieldName",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "invoiceTotal",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "issueDate",
+      "javadoc": "fieldName",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMin": "0",
+      "fieldValidateRulesMax": "100"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "booking",
+      "otherEntityName": "booking",
+      "relationshipType": "one-to-one",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "invoice"
+    }
+  ],
+  "changelogDate": "20201012201232",
+  "javadoc": "The Invoice entity.\\n@author A true hipster",
+  "entityTableName": "invoice",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "searchEngine": false,
+  "databaseType": "sql"
+}

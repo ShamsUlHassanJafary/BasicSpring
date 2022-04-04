@@ -1,0 +1,107 @@
+/* ==========================================================================
+Main page styles
+========================================================================== */
+
+$font-family-sans-serif-new: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+.hipster {
+  // opacity: 0.9;
+  // display: block;
+  // width: auto;
+  // height: 800px;
+  // background: url('../../content/images/gms4u-landing-page-bg.jpeg') no-repeat center top;
+  // background-size: contain;
+  font-family: $font-family-sans-serif-new;
+
+  .landing-jumbotron {
+    color: white;
+    font-size: large;
+
+    ul {
+      list-style-position: inside;
+    }
+  }
+
+  .landing-gms4u-logo {
+    display: block;
+    width: auto;
+    height: 200px;
+    background: url('../../content/images/gms4u-logo-with-tagline.png') no-repeat center top;
+    background-size: contain;
+  }
+
+  .landing-teknikality-logo {
+    display: block;
+    width: auto;
+    height: 200px;
+    background: url('../../content/images/logo/teknikality-logo-transparent.png') no-repeat center top;
+    background-size: contain;
+    margin-top: 3rem;
+  }
+
+  .bottom-edge {
+    z-index: 1;
+    width: 100% !important;
+    text-align: center;
+    margin-top: auto;
+  }
+
+  .home-left-panel {
+    height: 100%;
+  }
+
+  .home-left-panel,
+  .home-right-panel {
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+  }
+
+  .landing-background {
+    position: absolute;
+    width: 100% !important;
+  }
+
+  /* Extra small devices (phones, 600px and down) */
+  @media only screen and (max-width: 600px) {
+    .bottom-edge {
+      position: relative;
+      margin-top: 250px;
+    }
+
+    .home-right-panel {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .home-left-panel,
+    .home-right-panel {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+  }
+
+  // Medium devices (tablets, 768px and up)
+
+  @media (min-width: 1024px) and (max-width: 1366px) {
+    .home-left-panel,
+    .home-right-panel {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+
+    .landing-teknikality-logo {
+      margin-top: 0;
+      height: 175px;
+    }
+
+    .landing-gms4u-logo {
+      height: 175px;
+    }
+
+    .bottom-edge {
+      margin-bottom: 50px;
+    }
+  }
+}

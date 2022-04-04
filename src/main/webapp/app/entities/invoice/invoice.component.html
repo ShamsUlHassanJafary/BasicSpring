@@ -1,0 +1,126 @@
+<div class="row no-gutters">
+  <div class="col">
+    <div class="row no-gutters">
+      <div class="col">
+        <h2 id="page-heading">
+          <span>Invoices</span>
+        </h2>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col text-right">
+            <button id="jh-create-entity" class="btn btn-primary jh-create-entity create-invoice" [routerLink]="['/invoice/new']">
+              <fa-icon icon="plus"></fa-icon>
+              <span> Create a new Invoice </span>
+            </button>
+          </div>
+          <div class="col" *ngIf="existingBookings.length > 0">
+            <ng-select
+              *ngIf="existingBookings.length > 0"
+              [items]="existingBookings"
+              bindLabel="reference"
+              bindValue="id"
+              placeholder="Select from Booking"
+              (change)="onBookingChange($event)"
+            >
+            </ng-select>
+          </div>
+          <div class="col" *ngIf="existingQuotes.length > 0">
+            <ng-select
+              *ngIf="existingQuotes.length > 0"
+              [items]="existingQuotes"
+              bindLabel="reference"
+              bindValue="id"
+              placeholder="Select from Quote"
+              (change)="onQuoteChange($event)"
+            >
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <div class="alert alert-warning" id="no-result" *ngIf="invoices?.length === 0">
+          <span>No invoices found</span>
+        </div>
+        <div class="row py-2" *ngIf="invoices && invoices.length > 0">
+          <div class="col-6">
+            <input
+              type="text"
+              [(ngModel)]="filter.booking.searchTag"
+              class="form-control mx-2"
+              placeholder="Search by Vehicle Registration or Customer"
+            />
+          </div>
+        </div>
+        <div class="table-responsive" id="entities" *ngIf="invoices && invoices.length > 0">
+          <table class="table table-striped" aria-describedby="page-heading">
+            <thead jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
+              <tr>
+                <th scope="col" jhiSortBy="id">
+                  <span>ID <fa-icon icon="sort"></fa-icon></span>
+                </th>
+                <th scope="col"><span>Customer</span></th>
+                <th scope="col"><span>Vehicle</span></th>
+                <th scope="col"><span>Jobs Required</span></th>
+                <th scope="col"><span>Further Instruction</span></th>
+                <th scope="col" jhiSortBy="issueDate">
+                  <span>Invoice Date <fa-icon icon="sort"></fa-icon></span>
+                </th>
+                <th scope="col"><span>Invoice Total</span></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let invoice of invoices | filterBy: filter; trackBy: trackId">
+                <td>
+                  <a [routerLink]="['/invoice', invoice?.id, 'view']">{{ invoice?.reference }}</a>
+                </td>
+                <td>
+                  <div *ngIf="invoice?.booking && invoice?.booking?.customer">
+                    <a [routerLink]="['/customer', invoice?.booking?.customer?.id, 'view']">{{
+                      invoice?.booking?.customer?.firstName + ' ' + invoice?.booking?.customer?.lastName
+                    }}</a>
+                  </div>
+                </td>
+                <td>
+                  <div *ngIf="invoice && invoice?.booking?.vehicle">
+                    <a [routerLink]="['/vehicle', invoice?.booking?.vehicle?.id, 'view']">{{
+                      invoice?.booking?.vehicle?.registration?.toUpperCase()
+                    }}</a>
+                  </div>
+                </td>
+                <td>
+                  <ul *ngIf="invoice?.booking && invoice?.booking?.jobs && invoice?.booking?.jobs?.length! > 0">
+                    <li *ngFor="let job of invoice?.booking?.jobs">{{ job?.description }}</li>
+                  </ul>
+                </td>
+                <td>{{ invoice?.booking?.furtherInstruction }}</td>
+                <td>{{ invoice?.issueDate | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ invoice?.invoiceTotal | currency: 'GBP' }}</td>
+                <td class="text-right">
+                  <div class="btn-group">
+                    <button type="submit" [routerLink]="['/invoice', invoice?.id, 'view']" class="btn btn-info btn-sm">
+                      <fa-icon icon="eye"></fa-icon>
+                      <span class="d-none d-md-inline">View</span>
+                    </button>
+
+                    <button type="submit" [routerLink]="['/invoice', invoice?.id, 'edit']" class="btn btn-primary btn-sm">
+                      <fa-icon icon="pencil-alt"></fa-icon>
+                      <span class="d-none d-md-inline">Edit</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

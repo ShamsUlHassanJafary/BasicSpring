@@ -1,0 +1,48 @@
+{
+  "name": "Job",
+  "fields": [
+    {
+      "fieldName": "description",
+      "javadoc": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "garage",
+      "otherEntityName": "garage",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "jobs",
+      "otherEntityRelationshipName": "jobs"
+    },
+    {
+      "relationshipName": "bookings",
+      "otherEntityName": "booking",
+      "relationshipType": "many-to-many",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "jobs"
+    }
+  ],
+  "changelogDate": "20201012201233",
+  "javadoc": "The Job entity.\\n@author A true hipster",
+  "entityTableName": "job",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "searchEngine": false,
+  "databaseType": "sql"
+}

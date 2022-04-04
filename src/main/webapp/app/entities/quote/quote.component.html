@@ -1,0 +1,84 @@
+<div>
+  <h2 id="page-heading">
+    <span>Quotes</span>
+
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-quote" [routerLink]="['/quote/new']">
+      <fa-icon icon="plus"></fa-icon>
+      <span> Create a new Quote </span>
+    </button>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="quotes?.length === 0">
+    <span>No quotes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="quotes && quotes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Vehicle</span></th>
+          <th scope="col"><span>Jobs Required</span></th>
+          <th scope="col"><span>Further Instruction</span></th>
+          <th scope="col"><span>Customer</span></th>
+          <th scope="col" jhiSortBy="quoteDate"><span>Quote Date <fa-icon icon="sort"></fa-icon></span></th>
+          <th scope="col"><span>Quote Total</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quote of quotes; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/quote', quote.id, 'view']">{{ quote.reference }}</a>
+          </td>
+          <td>
+            <div *ngIf="quote.booking && quote.booking.vehicle">
+              <a [routerLink]="['/vehicle', quote.booking.vehicle?.id, 'view']">{{ quote.booking.vehicle?.registration?.toUpperCase() }}</a>
+            </div>
+          </td>
+          <td>
+            <ul *ngIf="quote.booking && quote.booking.jobs && quote.booking.jobs.length > 0">
+              <li *ngFor="let job of quote.booking.jobs">{{ job?.description }}</li>
+            </ul>
+          </td>
+          <td>{{ quote.booking?.furtherInstruction }}</td>
+          <td>
+            <div *ngIf="quote.booking && quote.booking.customer">
+              <a [routerLink]="['/customer', quote.booking.customer?.id, 'view']">{{
+                quote.booking.customer?.firstName + ' ' + quote.booking.customer?.lastName
+              }}</a>
+            </div>
+          </td>
+          <td>{{ quote.quoteDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ quote.quoteTotal | currency: 'GBP' }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/booking', quote.booking?.id, 'edit']" class="btn btn-secondary btn-sm">
+                <fa-icon icon="book"></fa-icon>
+                <span class="d-none d-md-inline">Book</span>
+              </button>
+              <button type="submit" [routerLink]="['/quote', quote.id, 'view']" class="btn btn-info btn-sm">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/quote', quote.id, 'edit']" class="btn btn-primary btn-sm">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(quote)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

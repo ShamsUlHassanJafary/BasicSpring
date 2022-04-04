@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="quote">
+      <h2><span>Quote</span> {{ quote.reference }}</h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+      <dl class="row-md jh-entity-details">
+        <dt><span>Vehicle</span></dt>
+        <dd>
+          <div *ngIf="quote?.booking?.vehicle">
+            <a [routerLink]="['/vehicle', quote?.booking?.vehicle?.id, 'view']">{{ quote?.booking?.vehicle?.registration }}</a>
+          </div>
+        </dd>
+        <dt><span>Jobs Required</span></dt>
+        <dd>
+          <ul>
+            <li *ngFor="let job of quote?.booking?.jobs">{{ job.description }}</li>
+          </ul>
+        </dd>
+        <dt><span>Further Instruction</span></dt>
+        <dd>
+          <span>{{ quote?.booking?.furtherInstruction }}</span>
+        </dd>
+        <dt><span>Mileage</span></dt>
+        <dd>
+          <span>{{ quote?.booking?.mileage }}</span>
+        </dd>
+        <dt><span>Customer</span></dt>
+        <dd>
+          <div *ngIf="quote?.booking?.customer">
+            <a [routerLink]="['/customer', quote?.booking?.customer?.id, 'view']">{{
+              quote?.booking?.customer?.firstName + ' ' + quote?.booking?.customer?.lastName
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span ngbTooltip="fieldName">Quote Date</span></dt>
+        <dd>
+          <span>{{ quote.quoteDate | date: 'dd/MM/yyyy' }}</span>
+        </dd>
+        <dt><span>Quote Total</span></dt>
+        <dd>
+          <span>{{ quote.quoteTotal | currency: 'GBP' }}</span>
+        </dd>
+      </dl>
+
+      <jhi-alert></jhi-alert>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/quote', quote.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+
+      <button type="button" (click)="sendQuote()" class="btn btn-dark">
+        <fa-icon [icon]="faSendStatus" [spin]="isSending"></fa-icon>
+        &nbsp;<span> {{ sendingMessage }}</span>
+      </button>
+
+      <button type="button" (click)="generateAndDownloadQuote()" class="btn btn-dark">
+        <fa-icon [icon]="faDownloadStatus" [spin]="isDownloading"></fa-icon>
+        &nbsp;<span> {{ downloadingMessage }}</span>
+      </button>
+    </div>
+  </div>
+</div>

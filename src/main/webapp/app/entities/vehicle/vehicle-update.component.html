@@ -1,0 +1,104 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-vehicle-heading">Create or edit a Vehicle</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+          <label for="id">ID</label>
+          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+        </div>
+
+        <div class="form-group">
+          <label for="field_registration">Registration</label>
+          <input
+            type="text"
+            class="form-control"
+            name="registration"
+            id="field_registration"
+            formControlName="registration"
+            [value]="editForm.get('registration')!.value | uppercase"
+            autocomplete="off"
+          />
+          <div
+            *ngIf="editForm.get('registration')!.invalid && (editForm.get('registration')!.dirty || editForm.get('registration')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('registration')?.errors?.required"> This field is required. </small>
+
+            <small class="form-text text-danger" *ngIf="editForm.get('registration')?.errors?.pattern">
+              Vehicle Registration Invalid.
+            </small>
+          </div>
+          <button
+            type="button"
+            [disabled]="editForm.get('registration')!.invalid"
+            class="btn btn-sm btn-secondary my-2"
+            (click)="verifyVehicle()"
+          >
+            Verify Vehicle
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label for="field_make">Make</label>
+          <input type="text" class="form-control" name="make" id="field_make" formControlName="make" />
+        </div>
+
+        <div class="form-group">
+          <label for="field_model">Model</label>
+          <input type="text" class="form-control" name="model" id="field_model" formControlName="model" />
+        </div>
+
+        <div class="form-group">
+          <label for="field_colour">Colour</label>
+          <select name="colour" id="field_colour" class="form-control" formControlName="colour">
+            <option *ngFor="let item of colours" [value]="item?.toUpperCase()">{{ item | uppercase }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="field_motExpiryDate" ngbTooltip="motExpiryDate">MOT Due Date</label>
+          <div class="input-group">
+            <input
+              id="field_motExpiryDate"
+              type="text"
+              class="form-control"
+              name="motExpiryDate"
+              ngbDatepicker
+              #motExpiryDateDp="ngbDatepicker"
+              formControlName="motExpiryDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="motExpiryDateDp.toggle()">
+                <fa-icon [icon]="'calendar-alt'"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="false">
+          <label for="field_customer">Customer</label>
+          <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption"
+              *ngFor="let customerOption of customers; trackBy: trackById"
+            >
+              {{ customerOption?.firstName + ' ' + customerOption.lastName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

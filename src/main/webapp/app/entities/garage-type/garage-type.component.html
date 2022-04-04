@@ -1,0 +1,41 @@
+<div>
+    <h2 id="page-heading">
+        <span>Garage Types</span>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="garageTypes?.length === 0">
+        <span>No garageTypes found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="garageTypes && garageTypes.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Name</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let garageType of garageTypes ;trackBy: trackId">
+                    <td><a [routerLink]="['/garage-type', garageType.id, 'view']">{{ garageType.id }}</a></td>
+                    <td>{{ garageType.name }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/garage-type', garageType.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

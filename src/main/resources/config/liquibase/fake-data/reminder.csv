@@ -1,0 +1,11 @@
+id;description;event_date;enabled;alert_date;second_alert_date;comment;email_enabled;sms_enabled;alert_time;second_alert_time;customer_id;vehicle_id;garage_id
+1;Mississippi;2021-02-25;true;2021-02-25;2021-02-25;Small Soft Fish;false;true;2021-02-25T15:52:25;2021-02-25T21:41:55;1;1;1
+2;back up Borders Lead;2021-02-25;true;2021-02-25;2021-02-25;Music Grocery SMS;true;true;2021-02-25T13:29:42;2021-02-25T18:24:40;2;2;2
+3;plum;2021-02-25;true;2021-02-25;2021-02-25;grid-enabled;true;true;2021-02-24T22:24:31;2021-02-25T08:43:58;3;3;3
+4;Sao Tome and Principe time-frame Wooden;2021-02-25;true;2021-02-25;2021-02-24;Sleek;false;true;2021-02-25T14:08:42;2021-02-25T07:36:51;4;4;4
+5;Plain;2021-02-25;true;2021-02-24;2021-02-25;indexing Gorgeous Cotton Shirt Court;true;true;2021-02-25T11:31:37;2021-02-25T01:25:47;5;5;5
+6;expedite Computers invoice;2021-02-25;false;2021-02-25;2021-02-25;Cambridgeshire Hollow Gorgeous Wooden Cheese;true;true;2021-02-25T22:06:44;2021-02-25T20:29:21;6;6;6
+7;payment Netherlands Antilles Personal Loan Account;2021-02-24;true;2021-02-25;2021-02-25;bus;true;false;2021-02-25T13:46:42;2021-02-25T15:42:00;7;7;7
+8;maximize;2021-02-25;false;2021-02-25;2021-02-25;static;true;false;2021-02-25T15:41:10;2021-02-25T13:54:52;8;8;8
+9;mint green Engineer;2021-02-25;true;2021-02-25;2021-02-24;payment reboot;true;false;2021-02-25T16:00:05;2021-02-25T10:06:22;9;9;9
+10;Dominica;2021-02-25;false;2021-02-25;2021-02-25;United States of America teal;true;true;2021-02-25T21:17:45;2021-02-25T06:43:46;10;10;10

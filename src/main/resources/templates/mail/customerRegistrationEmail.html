@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{email.customer.registration.title(${garage.businessName})}">JHipster creation</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}"/>
+</head>
+<body>
+<p th:text="#{email.reminder.greeting(${customer.firstName + ' ' + customer.lastName})}">
+    Dear
+</p>
+<p th:text="#{email.customer.registration(${garage.businessName})}">
+    Your JHipster account has been created, please click on the URL below to access it:
+</p>
+<p>Please get in touch with us on the following contact details if you require further information.</p>
+<p>
+    <span th:text="#{email.customer.text2}">Regards, </span>
+    <br/>
+    <em th:text="#{email.reminder.signature(${garage.businessName})}">JHipster.</em>
+    <br/>
+    <span th:text="${garage.businessEmail}"></span>
+    <br/>
+    <span th:text="${garage.phoneNumber}"></span>
+</p>
+</body>
+</html>

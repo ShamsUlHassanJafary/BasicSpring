@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="booking">
+      <h2><span>Booking</span> {{ booking.reference }}</h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Vehicle</span></dt>
+        <dd>
+          <div *ngIf="booking.vehicle">
+            <a [routerLink]="['/vehicle', booking.vehicle?.id, 'view']">{{ booking.vehicle?.registration }}</a>
+          </div>
+        </dd>
+        <dt><span ngbTooltip="bookingDate">Booking Date</span></dt>
+        <dd>
+          <span>{{ booking.bookingDate | date: 'dd/MM/yyyy' }}</span>
+        </dd>
+        <dt><span>Booking Time</span></dt>
+        <dd>
+          <span>{{ booking.bookingTime | date: 'HH:mm' }}</span>
+        </dd>
+        <dt><span>Jobs Required</span></dt>
+        <dd>
+          <ul>
+            <li *ngFor="let job of booking!.jobs">{{ job.description }}</li>
+          </ul>
+        </dd>
+        <dt><span>Further Instruction</span></dt>
+        <dd>
+          <span>{{ booking.furtherInstruction }}</span>
+        </dd>
+        <dt><span>Mileage</span></dt>
+        <dd>
+          <span>{{ booking?.mileage }}</span>
+        </dd>
+        <dt><span>Customer</span></dt>
+        <dd>
+          <div *ngIf="booking!.customer">
+            <a [routerLink]="['/customer', booking.customer?.id, 'view']">{{
+              booking.customer?.firstName + ' ' + booking.customer?.lastName
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+      </button>
+
+      <button type="button" *ngIf="!isComplete(booking)" [routerLink]="['/booking', booking.id, 'edit']" class="btn btn-primary">
+        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+      </button>
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+    <head>
+        <title th:text="#{email.serviceHistory.title}">JHipster activation</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+    </head>
+    <body>
+        <p th:text="#{email.booking.greeting(${customer.firstName})}">
+            Dear
+        </p>
+        <p th:text="#{email.serviceHistory.text1(${vehicle.registration})}">
+            Your JHipster account has been created, please click on the URL below to activate it:
+        </p>
+        <p>
+            <span th:text="#{email.booking.text2}">Regards, </span>
+            <br/>
+            <em th:text="#{email.booking.signature(${garage.businessName})}">JHipster.</em>
+            <br/>
+            <span th:text="${garage.businessEmail}"></span>
+            <br/>
+            <span th:text="${garage.phoneNumber}"></span>
+        </p>
+    </body>
+</html>

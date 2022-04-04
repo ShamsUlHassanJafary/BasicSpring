@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="reminder">
+            <h2><span>Reminder</span> {{ reminder.reference }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{ reminder.description }}</span>
+                </dd>
+                <dt><span>Event Date</span></dt>
+                <dd>
+                    <span>{{ reminder.eventDate | date: 'dd/MM/yyyy' }}</span>
+                </dd>
+                <dt><span>Enabled</span></dt>
+                <dd>
+                    <span>{{ reminder.enabled }}</span>
+                </dd>
+                <dt><span>Alert Date</span></dt>
+                <dd>
+                    <span>{{ reminder.alertDate | date: 'dd/MM/yyyy' }}</span>
+                </dd>
+                <dt><span>Second Alert Date</span></dt>
+                <dd>
+                    <span>{{ reminder.secondAlertDate | date: 'dd/MM/yyyy' }}</span>
+                </dd>
+                <dt><span>Comment</span></dt>
+                <dd>
+                    <span>{{ reminder.comment }}</span>
+                </dd>
+                <dt><span>Customer</span></dt>
+                <dd>
+                    <div *ngIf="reminder.customer">
+                        <a [routerLink]="['/customer', reminder.customer?.id, 'view']">{{ reminder.customer?.firstName + ' '+ reminder.customer?.lastName  }}</a>
+                    </div>
+                </dd>
+                <dt><span>Vehicle</span></dt>
+                <dd>
+                    <div *ngIf="reminder.vehicle">
+                        <a [routerLink]="['/vehicle', reminder.vehicle?.id, 'view']">{{ reminder.vehicle?.registration }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/reminder', reminder.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

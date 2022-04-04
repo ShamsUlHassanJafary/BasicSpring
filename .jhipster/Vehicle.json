@@ -1,0 +1,63 @@
+{
+  "name": "Vehicle",
+  "fields": [
+    {
+      "fieldName": "registration",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "make",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "model",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "colour",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "motDue",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "booking",
+      "otherEntityRelationshipName": "vehicle",
+      "relationshipName": "bookings"
+    },
+    {
+      "relationshipName": "garages",
+      "otherEntityName": "garage",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "vehicles"
+    },
+    {
+      "relationshipName": "owners",
+      "otherEntityName": "customer",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "vehicles"
+    }
+  ],
+  "changelogDate": "20201012201236",
+  "javadoc": "The Vehicle entity.\\n@author A true hipster",
+  "entityTableName": "vehicle",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "searchEngine": false,
+  "databaseType": "sql"
+}

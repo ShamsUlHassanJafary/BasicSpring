@@ -1,0 +1,11 @@
+id;booking_date;booking_time;further_instruction;status;garage_id;vehicle_id;customer_id
+1;2020-10-12;2020-10-11T21:08:33;Gabon;COMPLETED;1;1;1
+2;2020-10-12;2020-10-11T20:14:03;ADP cultivate;IN_PROGRESS;2;2;2
+3;2020-10-12;2020-10-12T08:16:44;Architect;PENDING;3;3;3
+4;2020-10-12;2020-10-11T22:17:54;Saint Vincent and the Grenadines innovate monitor;PENDING;4;4;4
+5;2020-10-12;2020-10-12T06:53:35;Oklahoma;IN_PROGRESS;5;5;5
+6;2020-10-11;2020-10-12T02:37:35;Specialist;CONFIRMED;6;6;6
+7;2020-10-12;2020-10-11T23:49:46;Tennessee Planner world-class;IN_PROGRESS;7;7;7
+8;2020-10-12;2020-10-12T14:15:57;Austria;PENDING;8;8;8
+9;2020-10-12;2020-10-12T03:29:35;Product white;PENDING;9;9;9
+10;2020-10-12;2020-10-11T23:38:35;Virginia Refined productize;IN_PROGRESS;10;10;10

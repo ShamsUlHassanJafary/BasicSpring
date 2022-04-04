@@ -1,0 +1,2 @@
+[kubernetes_master_nodes]
+ gep-instance ansible_host=35.246.97.204 ansible_port=22 ansible_user=teknikality_central ansible_password=Teknigen@1618

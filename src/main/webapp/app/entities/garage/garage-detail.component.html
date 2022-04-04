@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="garage">
+      <h2><span>Garage</span> {{ garage.id }}</h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span ngbTooltip="businessName">Business Name</span></dt>
+        <dd>
+          <span>{{ garage.businessName }}</span>
+        </dd>
+        <dt><span>Line Address 1</span></dt>
+        <dd>
+          <span>{{ garage.lineAddress1 }}</span>
+        </dd>
+        <dt><span>Line Address 2</span></dt>
+        <dd>
+          <span>{{ garage.lineAddress2 }}</span>
+        </dd>
+        <dt><span>City</span></dt>
+        <dd>
+          <span>{{ garage.city }}</span>
+        </dd>
+        <dt><span>County</span></dt>
+        <dd>
+          <span>{{ garage.county }}</span>
+        </dd>
+        <dt><span>Postcode</span></dt>
+        <dd>
+          <span>{{ garage.postcode }}</span>
+        </dd>
+        <dt><span>Country</span></dt>
+        <dd>
+          <span>{{ garage.country }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ garage.businessEmail }}</span>
+        </dd>
+        <dt><span>Phone Number</span></dt>
+        <dd>
+          <span>{{ garage.phoneNumber }}</span>
+        </dd>
+        <dt><span>VAT Registered</span></dt>
+        <dd>
+          <span>{{ garage.vatRegistered }}</span>
+        </dd>
+        <dt><span>Garage Admin(s)</span></dt>
+        <dd>
+          <div *ngIf="garage?.garageAdmins">
+            <span *ngFor="let garageAdmin of garage?.garageAdmins">
+              <a [routerLink]="['/garage-admin', garageAdmin?.id, 'view']">{{
+                garageAdmin?.user?.firstName + ' ' + garageAdmin?.user?.lastName
+              }}</a>
+            </span>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/garage', garage.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

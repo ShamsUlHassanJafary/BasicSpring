@@ -1,0 +1,198 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-booking-heading">Create or edit a Booking</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="!editForm.get('reference')!.value">
+          <label for="reference">ID</label>
+          <input type="text" class="form-control" id="reference" name="reference" formControlName="reference" readonly />
+        </div>
+
+        <jhi-select-create-customer [editBookingForm]="editForm"></jhi-select-create-customer>
+
+        <jhi-select-create-vehicle [editBookingForm]="editForm"></jhi-select-create-vehicle>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Item No.</th>
+              <th>Job Description</th>
+              <th>Price (£)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr formGroupName="job">
+              <td></td>
+              <td>
+                <ng-select
+                  placeholder="Select or Insert Custom Job"
+                  name="job"
+                  id="field_job"
+                  [addTag]="true"
+                  formControlName="job"
+                  (change)="onChange($event)"
+                >
+                  <ng-option *ngFor="let item of jobs" [value]="item" [disabled]="item.disabled">
+                    {{ item.description }}
+                  </ng-option>
+                </ng-select>
+              </td>
+              <td>
+                <input
+                  class="form-control"
+                  type="number"
+                  name="price"
+                  id="price"
+                  placeholder="0.00"
+                  formControlName="price"
+                  [value]="this.editForm.get('job')!.value?.price"
+                />
+              </td>
+              <td>
+                <button [disabled]="!isJobValid()" type="button" (click)="onAdd()" class="btn btn-success btn-sm">
+                  <fa-icon icon="plus"></fa-icon>
+                  <span class="d-none d-md-inline">Add</span>
+                </button>
+              </td>
+            </tr>
+            <ng-container formArrayName="jobs">
+              <tr *ngFor="let item of jobsRequired.controls; let i = index" [formGroupName]="i">
+                <td scope="row">{{ i + 1 }}</td>
+                <td>{{ item.get('description')!.value }}</td>
+                <td>
+                  <span>{{ item.get('price')!.value | currency: 'GBP' }}</span>
+                </td>
+                <td>
+                  <button *ngIf="!this.editForm.disabled" type="button" (click)="onDelete(i)" class="btn btn-danger btn-sm">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Delete</span>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+
+            <tr>
+              <td></td>
+              <td><strong>Total (£)</strong></td>
+              <td>
+                <div class="form-group">
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="quoteTotal"
+                    id="field_quoteTotal"
+                    [value]="getTotal(editForm.get('jobs')!.value)"
+                    readonly
+                  />
+                </div>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="field_furtherInstruction">Technician's Report</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              class="form-control"
+              name="furtherInstruction"
+              id="field_furtherInstruction"
+              formControlName="furtherInstruction"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="field_mileage">Mileage</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="mileage" id="field_mileage" formControlName="mileage" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="field_bookingDate" ngbTooltip="bookingDate">Booking Date</label>
+              <div class="col-sm-9">
+                <div class="input-group">
+                  <input
+                    id="field_bookingDate"
+                    type="text"
+                    class="form-control"
+                    name="bookingDate"
+                    ngbDatepicker
+                    #bookingDateDp="ngbDatepicker"
+                    formControlName="bookingDate"
+                  />
+                  <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="bookingDateDp.toggle()">
+                      <fa-icon [icon]="'calendar-alt'"></fa-icon>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="field_bookingTime">Booking Time</label>
+              <div class="col-sm-9">
+                <div class="d-flex">
+                  <input
+                    id="field_bookingTime"
+                    type="time"
+                    class="form-control"
+                    name="bookingTime"
+                    formControlName="bookingTime"
+                    placeholder="HH:mm"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" *ngIf="isBookingValid()" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+
+        <button
+          type="button"
+          *ngIf="editForm.get(['status'])!.value === 'CONFIRMED'"
+          (click)="startJob()"
+          [disabled]="editForm.invalid || !isValid() || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Start Job</span>
+        </button>
+        <button
+          type="button"
+          *ngIf="editForm.get(['status'])!.value === 'IN_PROGRESS'"
+          (click)="endJob()"
+          [disabled]="editForm.invalid || !isValid() || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Finish Job</span>
+        </button>
+        <button
+          type="button"
+          (click)="cancelJob()"
+          *ngIf="editForm.get(['status'])!.value === 'CONFIRMED'"
+          [disabled]="editForm.invalid || !isValid() || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Cancel Job</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

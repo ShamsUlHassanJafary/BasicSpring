@@ -1,0 +1,5 @@
+id;login;password_hash;first_name;last_name;email;image_url;activated;lang_key;created_by;last_modified_by
+1;system;$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG;System;System;system@localhost;;true;en;system;system
+2;anonymoususer;$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO;Anonymous;User;anonymous@localhost;;true;en;system;system
+3;admin;$2y$10$/5mJfsxkAAiYMjmSf9tW5unQWKniv5SUAftaJH9i3haJvgDqIAc6e;Administrator;Administrator;admin@localhost;;true;en;system;system
+4;user;$2y$10$mCx53GiIvQNqnl9QyXsvre6SoV37fKGElaz0C1kOJzw/CapboSgFC;User;User;user@localhost;;true;en;system;system

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Booking.
+    -->
+    <changeSet id="20201012201228-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="booking_id"
+                                 baseTableName="booking_jobs"
+                                 constraintName="fk_booking_jobs_booking_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="booking"/>
+
+        <addForeignKeyConstraint baseColumnNames="jobs_id"
+                                 baseTableName="booking_jobs"
+                                 constraintName="fk_booking_jobs_jobs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="job"/>
+        
+        <addForeignKeyConstraint baseColumnNames="garage_id"
+                                 baseTableName="booking"
+                                 constraintName="fk_booking_garage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="garage"/>
+
+        <addForeignKeyConstraint baseColumnNames="vehicle_id"
+                                 baseTableName="booking"
+                                 constraintName="fk_booking_vehicle_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vehicle"/>
+
+        <addForeignKeyConstraint baseColumnNames="customer_id"
+                                 baseTableName="booking"
+                                 constraintName="fk_booking_customer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"/>
+
+        <addForeignKeyConstraint baseColumnNames="quote_id"
+                                 baseTableName="booking"
+                                 constraintName="fk_booking_quote_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="quote"/>
+
+        <addForeignKeyConstraint baseColumnNames="invoice_id"
+                                 baseTableName="booking"
+                                 constraintName="fk_booking_invoice_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="invoice"/>
+
+    </changeSet>
+</databaseChangeLog>

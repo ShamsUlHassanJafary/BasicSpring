@@ -1,0 +1,33 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="Mbcatubig (generated)" id="1618139303213-6">
+        <addColumn tableName="invoice">
+            <column name="issue_date" type="date"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1618139303213-7">
+        <addColumn tableName="booking">
+            <column name="mileage" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1618139303213-8">
+        <addColumn tableName="garage">
+            <column name="vat_registered" type="bit"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1618139303213-1">
+        <setColumnRemarks columnName="booking_date" tableName="booking"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1618139303213-2">
+        <setColumnRemarks columnName="business_name" tableName="garage"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1618139303213-3">
+        <setColumnRemarks columnName="has_data_keep_consent" tableName="customer"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1618139303213-4">
+        <setColumnRemarks columnName="invoice_date" tableName="invoice"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1618139303213-5">
+        <setColumnRemarks columnName="quote_date" tableName="quote"/>
+    </changeSet>
+</databaseChangeLog>

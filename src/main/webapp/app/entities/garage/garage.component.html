@@ -1,0 +1,83 @@
+<div>
+    <h2 id="page-heading">
+        <span>Garages</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-garage" [routerLink]="['/garage/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Garage
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="garages?.length === 0">
+        <span>No garages found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="garages && garages.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Business Name</span></th>
+                    <th scope="col" ><span>Line Address 1</span></th>
+                    <th scope="col" ><span>Line Address 2</span></th>
+                    <th scope="col" ><span>City</span></th>
+                    <th scope="col" ><span>County</span></th>
+                    <th scope="col" ><span>Postcode</span></th>
+                    <th scope="col" ><span>Country</span></th>
+                    <th scope="col" ><span>Email</span></th>
+                    <th scope="col" ><span>Phone No.</span></th>
+                    <!-- <th scope="col" ><span>Garage Admin</span></th> -->
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let garage of garages ;trackBy: trackId">
+                    <td><a [routerLink]="['/garage', garage.id, 'view']">{{ garage.id }}</a></td>
+                    <td>{{ garage.businessName }}</td>
+                    <td>{{ garage.lineAddress1 }}</td>
+                    <td>{{ garage.lineAddress2 }}</td>
+                    <td>{{ garage.city }}</td>
+                    <td>{{ garage.county }}</td>
+                    <td>{{ garage.postcode }}</td>
+                    <td>{{ garage.country }}</td>
+                    <td>{{ garage.businessEmail }}</td>
+                    <td>{{ garage.phoneNumber }}</td>
+                    <!-- <td>
+                        <div *ngIf="garage.garageAdmin">
+                            <a [routerLink]="['/garage-admin', garage.garageAdmin?.id, 'view']" >{{ garage.garageAdmin?.id }}</a>
+                        </div>
+                    </td> -->
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/garage', garage.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/garage', garage.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(garage)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

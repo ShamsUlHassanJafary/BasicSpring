@@ -1,0 +1,95 @@
+<div class="card my-2">
+  <div class="card-body">
+    <h4 class="card-title text-center">Today's Bookings</h4>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"><span>ID</span></th>
+            <th scope="col"><span>Customer</span></th>
+            <th scope="col"><span>Vehicle</span></th>
+            <th scope="col"><span>Jobs Required</span></th>
+            <th scope="col"><span>Booking Time</span></th>
+            <th scope="col"><span>Further Instruction</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of bookings">
+            <td>
+              <a [routerLink]="['/booking', booking.id, 'view']">{{ booking.id }}</a>
+            </td>
+            <td>
+              <div *ngIf="booking.customer">
+                <a [routerLink]="['/customer', booking.customer?.id, 'view']">{{
+                  booking.customer?.firstName + ' ' + booking.customer?.lastName
+                }}</a>
+              </div>
+            </td>
+            <td>
+              <div *ngIf="booking.vehicle">
+                <a [routerLink]="['/vehicle', booking.vehicle?.id, 'view']">{{ booking.vehicle?.registration?.toUpperCase() }}</a>
+              </div>
+            </td>
+            <td>
+              <ul *ngIf="booking.jobs && booking.jobs.length > 0">
+                <li *ngFor="let job of booking.jobs">{{ job.description }}</li>
+              </ul>
+            </td>
+            <td>{{ booking.bookingTime | date: 'HH:mm' }}</td>
+            <td>{{ booking.furtherInstruction }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card my-2">
+  <div class="card-body">
+    <h4 class="card-title text-center">Today's Contact Reminder</h4>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"><span>ID</span></th>
+            <th scope="col"><span>Customer</span></th>
+            <th scope="col"><span>Phone #</span></th>
+            <th scope="col"><span>Email</span></th>
+            <th scope="col"><span>Vehicle</span></th>
+            <th scope="col"><span>Description</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reminder of reminders">
+            <td>
+              <a [routerLink]="['/reminder', reminder.id, 'view']">{{ reminder.id }}</a>
+            </td>
+            <td>
+              <div *ngIf="reminder.customer">
+                <a [routerLink]="['/customer', reminder.customer?.id, 'view']">{{
+                  reminder.customer?.firstName + ' ' + reminder.customer?.lastName
+                }}</a>
+              </div>
+            </td>
+            <td>
+              <div *ngIf="reminder.customer">
+                {{ reminder.customer?.phoneNumber }}
+              </div>
+            </td>
+            <td>
+              <div *ngIf="reminder.customer">
+                {{ reminder.customer?.email }}
+              </div>
+            </td>
+            <td>
+              <div *ngIf="reminder.vehicle">
+                <a [routerLink]="['/vehicle', reminder.vehicle?.id, 'view']">{{ reminder.vehicle?.registration + '' | uppercase }}</a>
+              </div>
+            </td>
+            <td>{{ reminder.description }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

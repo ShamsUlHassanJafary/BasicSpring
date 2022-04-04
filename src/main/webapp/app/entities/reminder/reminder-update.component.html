@@ -1,0 +1,174 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-reminder-heading">Create or edit a Reminder</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="!editForm.get('reference')!.value">
+          <label for="reference">ID</label>
+          <input type="text" class="form-control" id="reference" name="reference" formControlName="reference" readonly />
+        </div>
+
+        <div class="form-group">
+          <label for="field_description">Description</label>
+          <input type="text" class="form-control" name="description" id="field_description" formControlName="description" />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('description')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="field_eventDate" class="col-sm-3 col-form-label">Event Date</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input
+                id="field_eventDate"
+                type="text"
+                class="form-control"
+                name="eventDate"
+                ngbDatepicker
+                #eventDateDp="ngbDatepicker"
+                formControlName="eventDate"
+              />
+              <span class="input-group-append">
+                <button type="button" class="btn btn-secondary" (click)="eventDateDp.toggle()">
+                  <fa-icon icon="calendar-alt"></fa-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+          <div *ngIf="editForm.get('eventDate')!.invalid && (editForm.get('eventDate')!.dirty || editForm.get('eventDate')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('eventDate')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="field_emailEnabled">Send by email?</label>
+          <input type="checkbox" class="form-control" name="emailEnabled" id="field_emailEnabled" formControlName="emailEnabled" />
+          <div
+            *ngIf="editForm.get('emailEnabled')!.invalid && (editForm.get('emailEnabled')!.dirty || editForm.get('emailEnabled')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('emailEnabled')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="field_smsEnabled">Send by SMS?</label>
+          <input type="checkbox" class="form-control" name="smsEnabled" id="field_smsEnabled" formControlName="smsEnabled" />
+          <div *ngIf="editForm.get('smsEnabled')!.invalid && (editForm.get('smsEnabled')!.dirty || editForm.get('smsEnabled')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('smsEnabled')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <div class="form-group row">
+              <label for="field_alertDate" class="col-sm-4 col-form-label">Alert Date</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+                  <input
+                    id="field_alertDate"
+                    type="text"
+                    class="form-control"
+                    name="alertDate"
+                    ngbDatepicker
+                    #alertDateDp="ngbDatepicker"
+                    formControlName="alertDate"
+                  />
+                  <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="alertDateDp.toggle()">
+                      <fa-icon icon="calendar-alt"></fa-icon>
+                    </button>
+                  </span>
+                </div>
+              </div>
+              <div *ngIf="editForm.get('alertDate')!.invalid && (editForm.get('alertDate')!.dirty || editForm.get('alertDate')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('alertDate')?.errors?.required"> This field is required. </small>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="field_alertTime">Time:</label>
+              <div class="col-sm-9">
+                <div class="d-flex">
+                  <input
+                    id="field_alertTime"
+                    type="time"
+                    class="form-control"
+                    name="alertTime"
+                    formControlName="alertTime"
+                    placeholder="HH:mm"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <div class="form-group row">
+              <label for="field_secondAlertDate" class="col-sm-4 col-form-label">2nd Alert Date</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+                  <input
+                    id="field_secondAlertDate"
+                    type="text"
+                    class="form-control"
+                    name="secondAlertDate"
+                    ngbDatepicker
+                    #secondAlertDateDp="ngbDatepicker"
+                    formControlName="secondAlertDate"
+                  />
+                  <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="secondAlertDateDp.toggle()">
+                      <fa-icon icon="calendar-alt"></fa-icon>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="field_secondAlertTime">Time</label>
+              <div class="col-sm-9">
+                <div class="d-flex">
+                  <input
+                    id="field_secondAlertTime"
+                    type="time"
+                    class="form-control"
+                    name="secondAlertTime"
+                    formControlName="secondAlertTime"
+                    placeholder="HH:mm"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="field_comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" formControlName="comment" />
+        </div>
+
+        <jhi-select-create-customer [editBookingForm]="editForm"></jhi-select-create-customer>
+
+        <jhi-select-create-vehicle [editBookingForm]="editForm"></jhi-select-create-vehicle>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

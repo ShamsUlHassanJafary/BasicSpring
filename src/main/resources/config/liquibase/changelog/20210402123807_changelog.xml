@@ -1,0 +1,48 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-1">
+        <setTableRemarks tableName="booking"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-2">
+        <setTableRemarks tableName="customer"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-3">
+        <setTableRemarks tableName="garage"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-4">
+        <setTableRemarks tableName="invoice"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-5">
+        <setTableRemarks tableName="job"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-6">
+        <setTableRemarks tableName="quote"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-7">
+        <setTableRemarks tableName="vehicle"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-8">
+        <setColumnRemarks columnName="booking_date" tableName="booking"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-9">
+        <setColumnRemarks columnName="business_name" tableName="garage"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-10">
+        <addNotNullConstraint columnDataType="varchar(255)" columnName="description" tableName="job" validate="true"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-11">
+        <setColumnRemarks columnName="description" tableName="job"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-12">
+        <setColumnRemarks columnName="has_data_keep_consent" tableName="customer"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-13">
+        <setColumnRemarks columnName="invoice_date" tableName="invoice"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-14">
+        <addNotNullConstraint columnDataType="decimal(21,2)" columnName="price" tableName="job" validate="true"/>
+    </changeSet>
+    <changeSet author="Mbcatubig (generated)" id="1617367173533-15">
+        <setColumnRemarks columnName="quote_date" tableName="quote"/>
+    </changeSet>
+</databaseChangeLog>

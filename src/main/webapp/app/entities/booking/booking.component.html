@@ -1,0 +1,124 @@
+<div class="row no-gutters">
+  <div class="col">
+    <div class="row no-gutters">
+      <div class="col">
+        <h2 id="page-heading">
+          <span>Bookings</span>
+        </h2>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col text-right">
+            <button id="jh-create-entity" class="btn btn-primary jh-create-entity create-booking" [routerLink]="['/booking/new']">
+              <fa-icon [icon]="'plus'"></fa-icon>
+              <span> Create a new Booking </span>
+            </button>
+          </div>
+          <div class="col" *ngIf="existingQuotes.length > 0">
+            <ng-select
+              *ngIf="existingQuotes.length > 0"
+              [items]="existingQuotes"
+              bindLabel="reference"
+              bindValue="id"
+              placeholder="Select from Quote"
+              (change)="onQuoteChange($event)"
+            >
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <div class="alert alert-warning" id="no-result" *ngIf="bookings?.length === 0">
+          <span>No bookings found</span>
+        </div>
+
+        <div class="table-responsive" id="entities" *ngIf="bookings && bookings.length > 0">
+          <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+              <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
+                <th scope="col"><span>ID</span></th>
+                <th scope="col"><span>Customer</span></th>
+                <th scope="col"><span>Vehicle</span></th>
+                <th scope="col"><span>Jobs Required</span></th>
+                <th scope="col" jhiSortBy="bookingDate">
+                  <span>Booking Date <fa-icon icon="sort"></fa-icon></span>
+                </th>
+                <th scope="col"><span>Booking Time</span></th>
+                <th scope="col"><span>Further Instruction</span></th>
+
+                <th scope="col"><span>Status</span></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let booking of bookings; trackBy: trackId">
+                <td>
+                  <a [routerLink]="['/booking', booking.id, 'view']">{{ booking.reference }}</a>
+                </td>
+                <td>
+                  <div *ngIf="booking.customer">
+                    <a [routerLink]="['/customer', booking.customer?.id, 'view']">{{
+                      booking.customer?.firstName + ' ' + booking.customer?.lastName
+                    }}</a>
+                  </div>
+                </td>
+                <td>
+                  <div *ngIf="booking.vehicle">
+                    <a [routerLink]="['/vehicle', booking.vehicle?.id, 'view']">{{ booking.vehicle?.registration?.toUpperCase() }}</a>
+                  </div>
+                </td>
+                <td>
+                  <ul *ngIf="booking.jobs && booking.jobs.length > 0">
+                    <li *ngFor="let job of booking.jobs">{{ job.description }}</li>
+                  </ul>
+                </td>
+                <td>{{ booking.bookingDate | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ booking.bookingTime | date: 'HH:mm' }}</td>
+                <td>{{ booking.furtherInstruction }}</td>
+
+                <td>{{ booking?.status }}</td>
+                <td class="text-right">
+                  <div class="btn-group">
+                    <button type="submit" [routerLink]="['/booking', booking.id, 'view']" class="btn btn-info btn-sm">
+                      <fa-icon [icon]="'eye'"></fa-icon>
+                      <span class="d-none d-md-inline">View</span>
+                    </button>
+                    <button
+                      type="submit"
+                      *ngIf="booking?.status === 'CONFIRMED' || booking?.status === 'IN_PROGRESS'"
+                      [routerLink]="['/booking', booking.id, 'edit']"
+                      class="btn btn-primary btn-sm"
+                    >
+                      <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                      <span class="d-none d-md-inline">Edit</span>
+                    </button>
+                    <button type="submit" *ngIf="booking?.status === 'CONFIRMED'" (click)="delete(booking)" class="btn btn-danger btn-sm">
+                      <fa-icon icon="times"></fa-icon>
+                      <span class="d-none d-md-inline">Delete</span>
+                    </button>
+                    <button
+                      type="submit"
+                      *ngIf="isComplete(booking)"
+                      [routerLink]="['/invoice', 'new']"
+                      [state]="{ bookingId: this.booking?.id }"
+                      class="btn btn-dark btn-sm"
+                    >
+                      <fa-icon icon="receipt" [fixedWidth]="true"></fa-icon><span class="d-none d-md-inline">Create Invoice</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

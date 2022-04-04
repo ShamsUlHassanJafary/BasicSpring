@@ -1,0 +1,6 @@
+export enum Authority {
+  ADMIN = 'ROLE_ADMIN',
+  USER = 'ROLE_USER',
+  GARAGE_OWNER = 'ROLE_GARAGE_OWNER',
+  GARAGE_ADMIN = 'ROLE_GARAGE_ADMIN',
+}

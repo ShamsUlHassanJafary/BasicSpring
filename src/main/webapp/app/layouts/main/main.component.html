@@ -1,0 +1,24 @@
+<jhi-page-ribbon></jhi-page-ribbon>
+
+<div class="page-wrapper" [ngClass]="{ toggled: isAuthenticated() ? getSideBarState() : true, 'car-background': !isAuthenticated() }">
+  <router-outlet name="navbar"></router-outlet>
+  <button
+    class="hamburger hamburger--collapse"
+    *ngIf="isAuthenticated()"
+    (click)="toggleSidebar()"
+    [ngClass]="{ 'is-active': !getSideBarState() }"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner" [ngClass]="{ dark: !isAuthenticated() ? '#000' : '#fff' }"></span>
+    </span>
+  </button>
+  <main class="page-content vh-100" [ngStyle]="{ background: !isAuthenticated() ? '#010102' : 'none' }">
+    <div class="container-fluid" [ngStyle]="{ background: !isAuthenticated() ? '#010102' : 'none' }">
+      <div class="card jh-card" [ngStyle]="{ background: !isAuthenticated() ? 'none' : '#fff' }">
+        <router-outlet></router-outlet>
+      </div>
+
+      <jhi-footer></jhi-footer>
+    </div>
+  </main>
+</div>

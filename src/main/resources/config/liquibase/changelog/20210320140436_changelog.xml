@@ -1,0 +1,28 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <changeSet id="202103202022-1" author="mbcatubig">
+        <dropTable tableName="garage_garage_admins"/>
+    </changeSet>
+
+    <changeSet id="202103202022-2" author="mbcatubig">
+        <addColumn tableName="garage_admin">
+            <column name="garage_id" type="bigint" />
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="202103202022-3" author="mbcatubig">
+        <addForeignKeyConstraint baseTableName="garage_admin" baseColumnNames="garage_id" constraintName="fk_garage_id"
+                                 referencedTableName="garage"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="202103202329-1" author="mbcatubig">
+      <dropUniqueConstraint tableName="customer" uniqueColumns="email" constraintName="ux_customer_email"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>

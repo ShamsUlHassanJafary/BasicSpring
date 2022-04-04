@@ -1,0 +1,125 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-garage-heading">Create or edit a Garage</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+          <label for="id">ID</label>
+          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+        </div>
+
+        <div class="form-group">
+          <label for="field_businessName" ngbTooltip="businessName">Business Name</label>
+          <input type="text" class="form-control" name="businessName" id="field_businessName" formControlName="businessName" />
+        </div>
+
+        <div class="form-group">
+          <label for="field_lineAddress1">Line Address 1</label>
+          <input type="text" class="form-control" name="lineAddress1" id="field_lineAddress1" formControlName="lineAddress1" />
+        </div>
+
+        <div class="form-group">
+          <label for="field_lineAddress2">Line Address 2</label>
+          <input type="text" class="form-control" name="lineAddress2" id="field_lineAddress2" formControlName="lineAddress2" />
+        </div>
+
+        <div class="form-group">
+          <label for="field_city">City</label>
+          <input type="text" class="form-control" name="city" id="field_city" formControlName="city" />
+        </div>
+
+        <div class="form-group">
+          <label for="field_county">County</label>
+          <input type="text" class="form-control" name="county" id="field_county" formControlName="county" />
+        </div>
+
+        <div class="form-group">
+          <label for="field_postcode">Postcode</label>
+          <input type="text" class="form-control" name="postcode" id="field_postcode" formControlName="postcode" />
+        </div>
+
+        <div class="form-group">
+          <label for="field_country">Country</label>
+          <input type="text" class="form-control" name="country" id="field_country" formControlName="country" />
+        </div>
+
+        <div class="form-group">
+          <label>Business Email</label>
+          <input type="email" class="form-control" name="businessEmail" formControlName="businessEmail" />
+
+          <div
+            *ngIf="
+              editForm.get('businessEmail')!.invalid && (editForm.get('businessEmail')!.dirty || editForm.get('businessEmail')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('businessEmail')?.errors?.maxlength">
+              This field cannot be longer than 100 characters.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="editForm.get('businessEmail')?.errors?.minlength">
+              This field is required to be at least 5 characters.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="editForm.get('businessEmail')?.errors?.email"> Your email is invalid. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="field_phoneNumber">Phone Number</label>
+          <input type="text" class="form-control" name="phoneNumber" id="field_phoneNumber" formControlName="phoneNumber" />
+          <div *ngIf="editForm.get('phoneNumber')!.invalid && (editForm.get('phoneNumber')!.dirty || editForm.get('phoneNumber')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('phoneNumber')?.errors?.required"> This field is required. </small>
+
+            <small class="form-text text-danger" *ngIf="editForm.get('phoneNumber')?.errors?.minlength">
+              This field is required to be at least 11 characters.
+            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('phoneNumber')?.errors?.maxlength">
+              This field cannot be longer than 13 characters.
+            </small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="field_colour">Garage Type</label>
+          <select name="garageType" id="field_garageType" class="form-control" formControlName="garageType">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="garageTypeOption.id === editForm.get('garageType')!.value?.id ? editForm.get('garageType')!.value : garageTypeOption"
+              *ngFor="let garageTypeOption of garageTypes; trackBy: garageTypeTrackById" [selected]="garageTypeOption.id === editForm.get('garageType')!.value?.id"
+            >
+              {{ garageTypeOption.name }}
+            </option>
+        </select>
+        </div>
+        <div class="form-group">
+          <label for="field_vatRegistered" ngbTooltip="vatRegistered">VAT Registered</label>
+          <input type="checkbox" class="form-control" name="vatRegistered" id="field_vatRegistered" formControlName="vatRegistered" />
+        </div>
+        <div class="form-group">
+          <label for="customFile">Business Logo</label>
+
+          <div class="custom-file">
+            <input id="customFile" type="file" class="custom-file-input" (change)="onFileChange($event)" />
+            <label class="custom-file-label" for="customFile"><fa-icon icon="upload"></fa-icon>&nbsp;{{ uploadMessage }}</label>
+          </div>
+          <img [src]="imageSrc" *ngIf="imageSrc" class="rounded my-2 w-25" />
+          <div *ngIf="fileLoaded" class="clearfix">
+            <button class="btn btn-danger my-1" type="button" (click)="deleteFile()"><fa-icon icon="times"></fa-icon> Remove Image</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

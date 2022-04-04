@@ -1,0 +1,55 @@
+<div class="row" [ngSwitch]="isAuthenticated()">
+  <div class="col">
+    <div class="row" *ngSwitchCase="false">
+      <div class="col-md-10 offset-md-1 hipster">
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <div class="row d-flex flex-wrap w-100 justify-content-center home-left-panel">
+              <img alt="Teknikality Car Background" src="../../content/images/carimage-with-shadow.png" class="landing-background" />
+
+              <div class="bottom-edge d-block justify-content-center">
+                <div class="w-100 landing-jumbotron">DON'T HAVE AN ACCOUNT YET?</div>
+
+                <a
+                  class="btn btn-light btn-block btn-lg my-2 mx-auto rounded-pill w-50"
+                  routerLink="account/register"
+                  routerLinkActive="active"
+                  ><fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon> <strong>Register</strong></a
+                >
+
+                <div class="w-100 landing-jumbotron">OR</div>
+
+                <a class="btn btn-light btn-block btn-lg my-2 mx-auto rounded-pill w-50" (click)="login()" id="login"
+                  ><fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon> <strong>Sign in</strong></a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 text-center home-right-panel">
+            <div class="landing-gms4u-logo"></div>
+
+            <div class="landing-jumbotron">
+              <p>TAKE CONTROL OF YOUR GARAGE WITH OUR MODERN GARAGE MANAGEMENT SYSTEM.</p>
+              <p>A TOOL THAT MAKES IT EASY TO:</p>
+              <ul>
+                <li>MANAGE QUOTATIONS AND INVOICES</li>
+                <li>MANAGE BOOKINGS</li>
+                <li>SEND MANUAL AND AUTO SMS/EMAIL REMINDERS TO CUSTOMERS</li>
+                <li>MANAGE CUSTOMERS AND VEHICLES HISTORY</li>
+              </ul>
+            </div>
+            <div class="landing-teknikality-logo"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="alert alert-success" *ngSwitchCase="true">
+          <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
+        </div>
+        <jhi-dashboard *jhiHasAnyAuthority="['ROLE_GARAGE_OWNER', 'ROLE_GARAGE_ADMIN']"></jhi-dashboard>
+      </div>
+    </div>
+  </div>
+</div>

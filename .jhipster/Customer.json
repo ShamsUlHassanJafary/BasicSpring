@@ -1,0 +1,91 @@
+{
+  "name": "Customer",
+  "fields": [
+    {
+      "fieldName": "hasDataKeepConsent",
+      "javadoc": "keepData",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "hasMarketingContent",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "hasNotificationContent",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": "11",
+      "fieldValidateRulesMaxlength": "13"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "5",
+      "fieldValidateRulesMaxlength": "254"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "customer",
+      "relationshipName": "user",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "booking",
+      "otherEntityRelationshipName": "customer",
+      "relationshipName": "bookings"
+    },
+    {
+      "relationshipName": "garages",
+      "otherEntityName": "garage",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "customers"
+    },
+    {
+      "relationshipName": "vehicles",
+      "otherEntityName": "vehicle",
+      "relationshipType": "many-to-many",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "owners"
+    }
+  ],
+  "changelogDate": "20201012201229",
+  "javadoc": "The Customer entity.\\n@author A true hipster",
+  "entityTableName": "customer",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "searchEngine": false,
+  "databaseType": "sql"
+}

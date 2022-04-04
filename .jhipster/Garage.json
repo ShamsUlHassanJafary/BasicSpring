@@ -1,0 +1,111 @@
+{
+  "name": "Garage",
+  "fields": [
+    {
+      "fieldName": "businessName",
+      "javadoc": "businessName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lineAddress1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lineAddress2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "county",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "postcode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "country",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "businessEmail",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": "5",
+      "fieldValidateRulesMaxlength": "254"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "minlength",
+        "maxlength"
+      ],
+      "fieldValidateRulesMinlength": "11",
+      "fieldValidateRulesMaxlength": "13"
+    },
+    {
+      "fieldName": "logoUrl",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "booking",
+      "otherEntityRelationshipName": "garage",
+      "relationshipName": "bookings"
+    },
+    {
+      "relationshipName": "jobs",
+      "otherEntityName": "job",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "garage"
+    },
+    {
+      "relationshipName": "garageAdmins",
+      "otherEntityName": "garageAdmin",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": [
+        "required"
+      ],
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "garages"
+    },
+    {
+      "relationshipName": "vehicles",
+      "otherEntityName": "vehicle",
+      "relationshipType": "many-to-many",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "garages"
+    },
+    {
+      "relationshipName": "customers",
+      "otherEntityName": "customer",
+      "relationshipType": "many-to-many",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "garages"
+    }
+  ],
+  "changelogDate": "20201012201230",
+  "javadoc": "The Garage entity.\\n@author A true hipster",
+  "entityTableName": "garage",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "searchEngine": false,
+  "databaseType": "sql"
+}

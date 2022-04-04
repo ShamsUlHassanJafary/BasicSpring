@@ -1,0 +1,93 @@
+{
+  "name": "Booking",
+  "fields": [
+    {
+      "fieldName": "bookingDate",
+      "javadoc": "bookingDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "bookingTime",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "furtherInstruction",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mileage",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "BookingStatus",
+      "fieldValues": "IN_PROGRESS,COMPLETED,CONFIRMED,PENDING,CANCELLED,INVOICED",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "jobs",
+      "otherEntityName": "job",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "bookings"
+    },
+    {
+      "relationshipName": "garage",
+      "otherEntityName": "garage",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "bookings"
+    },
+    {
+      "relationshipName": "vehicle",
+      "otherEntityName": "vehicle",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "bookings"
+    },
+    {
+      "relationshipName": "customer",
+      "otherEntityName": "customer",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"],
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "bookings"
+    },
+    {
+      "relationshipName": "quote",
+      "otherEntityName": "quote",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "useJPADerivedIdentifier": false,
+      "otherEntityRelationshipName": "booking"
+    },
+    {
+      "relationshipName": "invoice",
+      "otherEntityName": "invoice",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "useJPADerivedIdentifier": false,
+      "otherEntityRelationshipName": "booking"
+    }
+  ],
+  "changelogDate": "20201012201228",
+  "javadoc": "The Booking entity.\\n@author A true hipster",
+  "entityTableName": "booking",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "searchEngine": false,
+  "databaseType": "sql"
+}

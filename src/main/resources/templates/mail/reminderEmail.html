@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{email.reminder.title}">Reminder</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}"/>
+</head>
+<body>
+<p th:text="#{email.reminder.greeting(${customer.firstName + ' ' + customer.lastName})}">
+    Dear
+</p>
+<p th:text="#{email.reminder.text1(${vehicle.registration}, ${reminder.description}, ${#temporals.format(reminder.eventDate, 'dd-MM-yyyy')})}"></p>
+<p>
+    <span th:text="#{email.reminder.text2}">Regards, </span>
+    <br/>
+    <em th:text="#{email.reminder.signature(${reminder.garage.businessName})}">JHipster.</em>
+    <br/>
+    <span th:text="${reminder.garage.businessEmail}"></span>
+    <br/>
+    <span th:text="${reminder.garage.phoneNumber}"></span>
+</p>
+</body>
+</html>
